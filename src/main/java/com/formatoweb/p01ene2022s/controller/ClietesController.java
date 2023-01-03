@@ -25,4 +25,12 @@ public class ClietesController {
     public Clientes getClientebyId(@PathVariable Long id){
         return clientesService.getClienteById(id);
     }
+
+    @PutMapping("/clientes/{id}")
+    public Clientes updateCliente(@PathVariable Long id, @RequestBody Clientes newClientes){
+        Clientes oldCliente = getClientebyId(id);
+        oldCliente.setEdad(newClientes.getEdad());
+        oldCliente.setNombre(newClientes.getNombre());
+        return clientesService.saveClientes(oldCliente);
+    }
 }
